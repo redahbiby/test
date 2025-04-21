@@ -19,8 +19,8 @@ def show_sheets_page():
 
         # 👇 Affichage du graphique en barres
         # Remplace 'NomColonneX' et 'NomColonneY' par les noms réels
-        col_x = "Fonction"
-        col_y = "Motif de départ"
+        col_x = "Motif de départ"
+        col_y = "Fonction"
 
         # Vérifier que les colonnes existent
         if col_x in df.columns and col_y in df.columns:
