@@ -1,13 +1,11 @@
-
 import streamlit as st
 import pandas as pd
 import plotly.express as px
 
 def show_sheets_page():
-     
     st.image("Logo_Auto_Hall.png", width=180)
     st.title("List Depart Autohall 2025")
- 
+
     # Remplace cet ID par celui de ta feuille Google Sheets
     sheet_id = "1JUDA-tJpzyUpDSXb-daKN7ACVAP7LUboRVVplQD34eA"
     sheet_name = "listdepart"
@@ -18,14 +16,14 @@ def show_sheets_page():
         st.success("Données chargées avec succès depuis Google Sheets !")
         st.dataframe(df)
 
-        # 👇 Affichage du graphique en barres
-        # Remplace 'NomColonneX' et 'NomColonneY' par les noms réels
+        # 👇 Affichage du graphique en camembert (pie chart)
         col_x = "Fonction"
         col_y = "Motif de départ"
 
         # Vérifier que les colonnes existent
         if col_x in df.columns and col_y in df.columns:
-            fig = px.bar(df, x=col_x, y=col_y, title=f"{col_y} par {col_x}")
+            # Créer le graphique en camembert
+            fig = px.pie(df, names=col_x, values=col_y, title=f"{col_y} par {col_x}")
             st.plotly_chart(fig)
         else:
             st.warning("Les colonnes spécifiées n'existent pas dans la feuille Google Sheets.")
