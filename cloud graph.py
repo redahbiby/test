@@ -1,8 +1,10 @@
+
 import streamlit as st
 import pandas as pd
 import plotly.express as px
 
 def show_sheets_page():
+    st.image("logo.png", caption="Graphique des départs", use_column_width=True)
     st.title("Lecture de Google Sheets dans Streamlit")
 
     # Remplace cet ID par celui de ta feuille Google Sheets
