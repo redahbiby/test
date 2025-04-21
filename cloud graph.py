@@ -6,6 +6,7 @@ import plotly.express as px
 def show_sheets_page():
 
     st.title("List Depart Autohall ")
+    st.image("Logo_Auto_Hall.png", width=180)
  
 
     # Remplace cet ID par celui de ta feuille Google Sheets
