@@ -4,11 +4,10 @@ import pandas as pd
 import plotly.express as px
 
 def show_sheets_page():
-
-    st.title("List Depart Autohall ")
+     
     st.image("Logo_Auto_Hall.png", width=180)
+    st.title("List Depart Autohall ")
  
-
     # Remplace cet ID par celui de ta feuille Google Sheets
     sheet_id = "1JUDA-tJpzyUpDSXb-daKN7ACVAP7LUboRVVplQD34eA"
     sheet_name = "listdepart"
