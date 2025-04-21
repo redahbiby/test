@@ -17,29 +17,12 @@ def show_sheets_page():
         st.success("✅ Données chargées avec succès depuis Google Sheets !")
         st.dataframe(df)
 
-       # Comptage des fonctions
-fonctions_count = df["Fonction"].value_counts().reset_index()
-fonctions_count.columns = ["Fonction", "Nombre"]
-
-# Séparation entre ceux avec plusieurs départs et ceux avec 1 seul
-majoritaires = fonctions_count[fonctions_count["Nombre"] > 1]
-autres_total = fonctions_count[fonctions_count["Nombre"] == 1]["Nombre"].sum()
-
-# Ajout d’une ligne "Autres" si nécessaire
-if autres_total > 0:
-    autres_row = pd.DataFrame([["Autres", autres_total]], columns=["Fonction", "Nombre"])
-    fonctions_count_grouped = pd.concat([majoritaires, autres_row], ignore_index=True)
-else:
-    fonctions_count_grouped = majoritaires
-
-# Pie chart
-st.subheader("📌 Répartition des départs par Fonction (avec regroupement)")
-fig_fonctions = px.pie(fonctions_count_grouped, 
-                       names="Fonction", 
-                       values="Nombre", 
-                       title="Départs par Fonction (regroupés)")
-st.plotly_chart(fig_fonctions)
-
+        # 📊 1. Pie chart : Répartition par fonction
+        st.subheader("📌 Répartition des départs par Fonction")
+        fonctions_count = df["Fonction"].value_counts().reset_index()
+        fonctions_count.columns = ["Fonction", "Nombre"]
+        fig_fonctions = px.pie(fonctions_count, names="Fonction", values="Nombre", title="Départs par Fonction")
+        st.plotly_chart(fig_fonctions)
 
         # 📊 2. Pie chart : Répartition par motif
         st.subheader("📌 Répartition des motifs de départ")
@@ -59,6 +42,13 @@ st.plotly_chart(fig_fonctions)
                          title="Motifs de départ par Fonction")
         st.plotly_chart(fig_bar)
 
+        # 🌞 4. Sunburst chart : Fonction → Motif
+        st.subheader("📌 Vue hiérarchique : Fonction → Motif (Sunburst)")
+        fig_sunburst = px.sunburst(grouped, 
+                                   path=["Fonction", "Motif de départ"], 
+                                   values="Nombre", 
+                                   title="Hiérarchie des départs : Fonction → Motif")
+        st.plotly_chart(fig_sunburst)
 
     except Exception as e:
         st.error(f"❌ Erreur lors du chargement des données : {e}")
