@@ -19,12 +19,12 @@ def show_sheets_page():
 
         # 👇 Affichage du graphique en barres
         # Remplace 'NomColonneX' et 'NomColonneY' par les noms réels
-        col_x = "Fonction"
-        col_y = "Motif de départ"
+        col_y = "Fonction"
+        col_x = "Motif de départ"
 
         # Vérifier que les colonnes existent
         if col_x in df.columns and col_y in df.columns:
-            fig = px.bar(df, x=col_x, y=col_y, title=f"{col_y} par {col_x}")
+            fig = px.bar(df, y=col_y, x=col_x, title=f"{col_x} par {col_y}")
             st.plotly_chart(fig)
         else:
             st.warning("Les colonnes spécifiées n'existent pas dans la feuille Google Sheets.")
